@@ -1,8 +1,10 @@
+using Application.Services;
+using Domain.IRepository;
+using Infrastructure.Repositories;
 using WebApplication1.Interfaces;
-using WebApplication1.Repositories;
 using WebApplication1.Services;
 
-namespace WebApplication1.Configurations;
+namespace WebApplication1;
 
 public static class ServiceScopes
 {
@@ -16,8 +18,3 @@ public static class ServiceScopes
         return services;
     }
 }
-/* 
-builder.Services.AddScoped<IGarageRepository, GarageRepository>();
-builder.Services.AddScoped<IGarageService, GarageService>();
-builder.Services.AddScoped<ICarRepository, CarRepository>();
-builder.Services.AddScoped<ICarService, CarService>(); */
