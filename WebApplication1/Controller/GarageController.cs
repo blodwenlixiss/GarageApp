@@ -47,12 +47,12 @@ public class GarageController : ControllerBase
 
     // Car to garage
 
-    // [HttpPost("{garageId}/{carId}")]
-    // public async Task<IActionResult> AddCarToGarage(Guid garageId, Guid carId)
-    // {
-    //     await _garageService.AddCarToGarageAsync(garageId, carId);
-    //     return Ok($"Car is being added in{garageId}");
-    // }
+    [HttpPost("{garageId}/{carId}")]
+    public async Task<IActionResult> AddCarToGarage(Guid garageId, Guid carId)
+    {
+        await _garageService.AddCarToGarageAsync(garageId, carId);
+        return Ok($"Car is being added in{garageId}");
+    }
 
     [HttpDelete("{garageId:guid}/{carId:guid}")]
     public async Task<IActionResult> RemoveCarsFromGarage(Guid garageId, Guid carId)

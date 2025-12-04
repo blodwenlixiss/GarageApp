@@ -53,37 +53,46 @@ public class GarageRepository : IGarageRepository
     public async Task<Garage?> GetGarageByIdAsync(Guid garageId)
     {
         var garage = await _AppDbContecxt.Garages
-            .Where(g => g.GarageId == garageId)
             .Include(g => g.CarGarages)
             .ThenInclude(cg => cg.Car)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(g => g.GarageId == garageId);
         return garage;
     }
-    //     var garage = await _garageRepository.GetGarageByIdAsync(garageId);
 
+    public async Task<bool> CheckGarageById(Guid garageId)
+    {
+        var garage = await _AppDbContecxt.Garages
+            .Include(g => g.CarGarages)
+            .ThenInclude(cg => cg.Car)
+            .AnyAsync(g => g.GarageId == garageId);
+        return garage;
+    }
 
     public async Task<bool> AddCarToGarageAsync(CarGarage carGarage)
     {
-        {
-            await _AppDbContecxt.CarGarages.AddAsync(carGarage);
-            await _AppDbContecxt.SaveChangesAsync();
+        await _AppDbContecxt.CarGarages.AddAsync(carGarage);
+        await _AppDbContecxt.SaveChangesAsync();
 
-            return true;
-        }
+        return true;
     }
 
-    public async Task<bool> RemoveCarFromGarageAsync(Guid garageId, Guid carId)
+    public async Task UpdateCarGarageAsync(CarGarage entity)
     {
-        var garage = await _AppDbContecxt.Garages.FirstOrDefaultAsync(g => g.GarageId == garageId);
-        if (garage == null) return false;
-
-        var car = await _AppDbContecxt.Cars.FirstOrDefaultAsync(c => c.CarId == carId);
-        if (car == null) return false;
-        var exists = await _AppDbContecxt.CarGarages
-            .FirstOrDefaultAsync(cg => cg.GarageId == garageId && cg.CarId == carId);
-
-        _AppDbContecxt.CarGarages.Remove(exists);
+        _AppDbContecxt.CarGarages.Update(entity);
         await _AppDbContecxt.SaveChangesAsync();
-        return true;
+    }
+
+    public async Task<CarGarage?> CarGarageByIdAsync(Guid garageId, Guid carId)
+    {
+        return await _AppDbContecxt.CarGarages
+            .Include(cg => cg.Car)
+            .Include(cg => cg.Garage)
+            .FirstOrDefaultAsync(cg => cg.GarageId == garageId && cg.CarId == carId);
+    }
+
+    public async Task RemoveCarFromGarageAsync(CarGarage cg)
+    {
+        _AppDbContecxt.CarGarages.Remove(cg);
+        await _AppDbContecxt.SaveChangesAsync();
     }
 }

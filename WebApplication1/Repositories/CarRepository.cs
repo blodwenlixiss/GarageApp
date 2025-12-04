@@ -40,13 +40,11 @@ public class CarRepository : ICarRepository
     {
         var car = await _appDbContext.Cars
             .FirstOrDefaultAsync(c => c.CarId == carId);
-
-        if (car == null)
-        {
-            throw new Exception("Car is not found");
-        }
-
-  
+        return car;
+    }    public async Task<bool> CheckCarByIdAsync(Guid carId)
+    {
+        var car = await _appDbContext.Cars
+            .AnyAsync(c => c.CarId == carId);
         return car;
     }
 }

@@ -10,6 +10,8 @@ public interface IGarageRepository
     Task<bool> UpdateCapacityOfGarageAsync(Guid garageId, int newCapacity);
     Task<Garage?> GetGarageByIdAsync(Guid garageId);
     Task<bool> AddCarToGarageAsync(CarGarage carGarage);
-    Task<bool> RemoveCarFromGarageAsync(Guid garageId, Guid carId);
-
+    Task RemoveCarFromGarageAsync(CarGarage cg);
+    Task<bool> CheckGarageById(Guid garageId);
+    Task<CarGarage> CarGarageByIdAsync(Guid garageId, Guid carId);
+    Task UpdateCarGarageAsync(CarGarage entity);
 }

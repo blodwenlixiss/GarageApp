@@ -9,4 +9,5 @@ public interface ICarRepository
      Task<bool> DeleteCarAsync(Guid carId);
      Task<IEnumerable<Car>> GetAllCarsAsync();
      Task<Car?> GetCarByIdAsync(Guid carId);
+     Task<bool> CheckCarByIdAsync(Guid carId);
 }

@@ -6,6 +6,6 @@ public class GarageReadDto
     public required string GarageName { get; set; }
     public int Capacity { get; set; }
     
-    public List<CarGarageDto> Cars { get; set; } = new();
+    public List<CarGarageDto> Cars { get; set; } = [];
     
 }
