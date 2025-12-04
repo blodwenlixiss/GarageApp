@@ -1,6 +1,6 @@
 namespace WebApplication1.Models.Dtos;
 
-public class CarDtoRead
+public class CarDtoResponse
 {
     public Guid CarId { get; set; }
     public required string Make { get; set; }

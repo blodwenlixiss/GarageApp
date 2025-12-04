@@ -7,9 +7,9 @@ using WebApplication1.Models.Dtos;
 
 public static class GarageDtoMapper
 {
-    public static IEnumerable<GarageReadDto> ToGarageReadDto(this IEnumerable<Garage> garages)
+    public static IEnumerable<GarageReadDtoResponse> ToGarageReadDto(this IEnumerable<Garage> garages)
     {
-        var test = garages.Select(x => new GarageReadDto
+        var test = garages.Select(x => new GarageReadDtoResponse
         {
             GarageId = x.GarageId,
             GarageName = x.GarageName,
@@ -21,9 +21,9 @@ public static class GarageDtoMapper
         return test;
     }
 
-    public static GarageReadDto ToGarageDto(this Garage garage)
+    public static GarageReadDtoResponse ToGarageDto(this Garage garage)
     {
-        var garageDto = new GarageReadDto
+        var garageDto = new GarageReadDtoResponse
         {
             GarageId = garage.GarageId,
             GarageName = garage.GarageName,

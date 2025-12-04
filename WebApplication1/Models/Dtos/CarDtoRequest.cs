@@ -2,7 +2,7 @@ using WebApplication1.Models.Entities;
 
 namespace WebApplication1.Models.Dtos;
 
-public class CarDto
+public class CarDtoRequest
 {
     public required string Make { get; set; }
     public required string Model { get; set; }

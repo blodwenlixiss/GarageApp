@@ -4,11 +4,11 @@ namespace WebApplication1.Services;
 
 public interface IGarageService
 {
-    Task CreateGarageAsync(GarageDto garageDto);
-    Task<IEnumerable<GarageReadDto>> GetAllGaragesAsync();
+    Task CreateGarageAsync(GarageDtoRequest garageDtoRequest);
+    Task<IEnumerable<GarageReadDtoResponse>> GetAllGaragesAsync();
     Task DeleteGarageAsync(Guid garageId);
     Task UpdateGarageCapacityAsync(Guid garageId, int capacity);
     Task<bool> AddCarToGarageAsync(Guid garageId, Guid carId);
-    Task<GarageReadDto> GetCarsInGarageAsync(Guid garageId);
+    Task<GarageReadDtoResponse> GetCarsInGarageAsync(Guid garageId);
     Task<bool> RemoveCarFromGarageAsync(Guid garageId, Guid carId);
 }

@@ -1,6 +1,6 @@
 namespace WebApplication1.Models.Dtos;
 
-public class GarageReadDto
+public class GarageReadDtoResponse
 {
     public Guid GarageId { get; set; } = Guid.NewGuid();
     public required string GarageName { get; set; }

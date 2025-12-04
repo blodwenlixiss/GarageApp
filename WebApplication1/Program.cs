@@ -1,10 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using WebApplication1.Configurations;
-using WebApplication1.Data;
-using WebApplication1.Interfaces;
 using WebApplication1.Middleware;
-using WebApplication1.Repositories;
-using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

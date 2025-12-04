@@ -15,12 +15,6 @@ public class CarController : ControllerBase
         _carService = service;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateCarAsync(CarDto car)
-    {
-        await _carService.CreateCarAsync(car);
-        return Ok("Car is Added");
-    }
 
     [HttpGet]
     public async Task<IActionResult> GetAllCars()
@@ -36,6 +30,20 @@ public class CarController : ControllerBase
         if (singleCar == null) throw new Exception("Car is not exist");
 
         return Ok(singleCar);
+    }
+
+    [HttpGet("Garages/{carId:guid}")]
+    public async Task<IActionResult> GetGaragesWithCarId(Guid carId)
+    {
+        var garages = await _carService.GetGaragesWithCarId(carId);
+        return Ok(garages);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateCarAsync(CarDtoRequest car)
+    {
+        await _carService.CreateCarAsync(car);
+        return Ok("Car is Added");
     }
 
     [HttpDelete("{carId:guid}")]

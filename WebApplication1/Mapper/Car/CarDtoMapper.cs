@@ -5,13 +5,13 @@ using Models.Dtos;
 
 public static class CarDtoMapper
 {
-    public static IEnumerable<CarDtoRead> ToCarReadDto(this IEnumerable<Car> cars)
+    public static IEnumerable<CarDtoResponse> ToCarReadDto(this IEnumerable<Car> cars)
     {
-        var carList = new List<CarDtoRead>();
+        var carList = new List<CarDtoResponse>();
 
         foreach (var car in cars)
         {
-            var carDto = new CarDtoRead()
+            var carDto = new CarDtoResponse()
             {
                 CarId = car.CarId,
                 Model = car.Model,
@@ -24,9 +24,9 @@ public static class CarDtoMapper
         }
 
         return carList;
-    }    public static CarDtoRead ToCarReadSoloDto(this Car cars)
+    }    public static CarDtoResponse ToCarReadSoloDto(this Car cars)
     {
-            var carDto = new CarDtoRead()
+            var carDto = new CarDtoResponse()
             {
                 CarId = cars.CarId,
                 Model = cars.Model,

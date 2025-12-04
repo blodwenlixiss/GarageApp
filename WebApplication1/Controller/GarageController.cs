@@ -32,9 +32,9 @@ public class GarageController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddGarage(GarageDto garageDto)
+    public async Task<IActionResult> AddGarage(GarageDtoRequest garageDtoRequest)
     {
-        await _garageService.CreateGarageAsync(garageDto);
+        await _garageService.CreateGarageAsync(garageDtoRequest);
         return Ok("Garage has been created");
     }
 

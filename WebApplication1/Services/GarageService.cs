@@ -18,27 +18,27 @@ public class GarageService : IGarageService
         _carRepository = carRepository;
     }
 
-    public async Task CreateGarageAsync(GarageDto garageDto)
+    public async Task CreateGarageAsync(GarageDtoRequest garageDtoRequest)
     {
         var newGarage = new Garage
         {
-            GarageName = garageDto.GarageName,
-            Capacity = garageDto.Capacity,
+            GarageName = garageDtoRequest.GarageName,
+            Capacity = garageDtoRequest.Capacity,
         };
 
         await _garageRepository.CreateGarageAsync(newGarage);
     }
 
-    public async Task<GarageReadDto> GetCarsInGarageAsync(Guid garageId)
+    public async Task<GarageReadDtoResponse> GetCarsInGarageAsync(Guid garageId)
     {
         var cars = await _garageRepository.GetGarageByIdAsync(garageId);
         if (cars is null) throw new NotFoundException($"Garage is not found! with Id:{garageId}");
         var cars1 = cars.ToGarageDto();
 
-        return cars1; // using your existing mapper
+        return cars1;
     }
 
-    public async Task<IEnumerable<GarageReadDto>> GetAllGaragesAsync()
+    public async Task<IEnumerable<GarageReadDtoResponse>> GetAllGaragesAsync()
     {
         var allGarages = await _garageRepository.GetAllGaragesAsync();
         var allGaragesDto = allGarages.ToGarageReadDto();

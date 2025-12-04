@@ -5,9 +5,10 @@ namespace WebApplication1.Interfaces;
 
 public interface ICarRepository
 {
-     Task CreateCarAsync(Car car);
-     Task<bool> DeleteCarAsync(Guid carId);
-     Task<IEnumerable<Car>> GetAllCarsAsync();
-     Task<Car?> GetCarByIdAsync(Guid carId);
-     Task<bool> CheckCarByIdAsync(Guid carId);
+    Task CreateCarAsync(Car car);
+    Task<bool> DeleteCarAsync(Guid carId);
+    Task<IEnumerable<Car>> GetAllCarsAsync();
+    Task<Car?> GetCarByIdAsync(Guid carId);
+    Task<bool> CheckCarByIdAsync(Guid carId);
+    Task<List<Garage>> GetGaragesWithCarId(Guid carId);
 }

@@ -36,7 +36,13 @@ public class CarRepository : ICarRepository
         return allCars;
     }
 
-    public async Task<Car?> GetCarByIdAsync(Guid carId)
+    public async Task<List<Garage>> GetGaragesWithCarId(Guid carId)
+    {
+        var garages = await _appDbContext.CarGarages.Where(cg => cg.CarId == carId).Include(cg => cg.Garage).Select(cg=>cg.Garage).ToListAsync();
+        return garages;
+    }
+
+public async Task<Car?> GetCarByIdAsync(Guid carId)
     {
         var car = await _appDbContext.Cars
             .FirstOrDefaultAsync(c => c.CarId == carId);
