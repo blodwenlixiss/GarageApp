@@ -1,5 +1,5 @@
+using Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Models.Dtos;
 using WebApplication1.Services;
 
 namespace WebApplication1.Controller;
@@ -20,38 +20,39 @@ public class GarageController : ControllerBase
     public async Task<IActionResult> GetAllGarages()
     {
         var allGarages = await _garageService.GetAllGaragesAsync();
+
         return Ok(allGarages);
     }
 
     [HttpGet("{garageId:guid}")]
-    public async Task<IActionResult> GetSingleGarage(Guid garageId)
+    public async Task<IActionResult> GetGarageByIdAsync(Guid garageId)
     {
-        var garage = await _garageService.GetCarsInGarageAsync(garageId);
+        var garage = await _garageService.GetGarageByIdAsync(garageId);
 
         return Ok(garage);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddGarage(GarageDtoRequest garageDtoRequest)
+    public async Task<IActionResult> AddGarage(GarageRequestDto garageRequestDto)
     {
-        await _garageService.CreateGarageAsync(garageDtoRequest);
+        await _garageService.CreateGarageAsync(garageRequestDto);
+
         return Ok("Garage has been created");
     }
 
     [HttpDelete("{garageId:guid}")]
-    public async Task<IActionResult> DeleteGarage(Guid garageId)
+    public async Task<IActionResult> DeleteGarageById(Guid garageId)
     {
-        await _garageService.DeleteGarageAsync(garageId);
+        await _garageService.DeleteGarageByIdAsync(garageId);
+
         return Ok($"Garage with Id: {garageId} Is Deleted.");
     }
 
-    // Car to garage
-
     [HttpPost("{garageId}/{carId}")]
-    public async Task<IActionResult> AddCarToGarage(Guid garageId, Guid carId)
+    public async Task<IActionResult> AddCarToGarage(CarRequestDto carRequestDto)
     {
-        await _garageService.AddCarToGarageAsync(garageId, carId);
-        return Ok($"Car is being added in{garageId}");
+        await _garageService.AddCarToGarageAsync(carRequestDto);
+        return Ok($"Car is being added in{carRequestDto.GarageId}");
     }
 
     [HttpDelete("{garageId:guid}/{carId:guid}")]

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Domain.Exceptions;
 using WebApplication1.Exceptions;
 
 namespace WebApplication1.Middleware;

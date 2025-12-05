@@ -1,6 +1,5 @@
-using System.Reflection.Metadata.Ecma335;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
 
 namespace WebApplication1.Configurations;
 
@@ -10,6 +9,8 @@ public static class DbConfiguration
     {
         services.AddDbContext<AppDbContext>(opt =>
             opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+
         return services;
     }
 }
